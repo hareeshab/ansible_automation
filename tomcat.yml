@@ -1,0 +1,14 @@
+---
+- name: Tomcat deployment playbook
+  hosts: appserver       
+  become: yes               
+  become_method: sudo       
+  remote_user: ubuntu     
+  vars:
+    tomcat_ver: 9.0.52                          
+    ui_manager_user: manager                    
+    ui_manager_pass: test@123  
+    ui_admin_username: admin                   
+    ui_admin_pass: admin@123        
+  roles:
+    - tomcat
