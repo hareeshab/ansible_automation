@@ -1,0 +1,27 @@
+---
+- hosts: localhost
+  connection: local
+  serial: 3
+  strategy: free
+  gather_facts: False
+  remote_user: ec2-user
+  vars:
+    ansible_python_interpreter: /usr/bin/python3
+  roles:
+    - aws-ec2
+  post_tasks:
+    - shell: sleep 60
+
+- hosts: webserver
+  remote_user: ec2-user
+  become: yes
+  become_user: ec2-user
+  become_method: sudo
+  pre_tasks:
+    - shell: sleep 60
+      async: 45
+      poll: 5
+
+  roles:
+    - my_role
+

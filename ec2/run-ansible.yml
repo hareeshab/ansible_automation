@@ -1,0 +1,8 @@
+---
+- hosts: webserver
+  become: yes
+  become_method: sudo
+  remote_user: ec2-user
+  
+  roles:
+  - my-role

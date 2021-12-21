@@ -1,0 +1,12 @@
+---
+# vars file for aws-ec2
+
+
+region: us-east-2
+instance_type: t2.micro
+ami: ami-002068ed284fb165b  # AMI Linux-2 
+project_name: automation
+env: new
+app_code_user: "ec2-user" # remote user
+hoststring: "ansible_ssh_user=ec2-user ansible_ssh_private_key_file=/home/ec2-user/ec2/aws-private.pem"
+hostpath: "/home/ec2-user/ec2/hosts"

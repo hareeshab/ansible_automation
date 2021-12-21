@@ -1,0 +1,13 @@
+---
+
+- name: configuring http application
+  template:
+    src: httpd.j2
+    dest: /etc/httpd/conf/httpd.conf
+
+- name: deploying httpd application
+  copy:
+    src: files/index.html
+    dest: /var/www/html
+  notify:
+  - restart apache

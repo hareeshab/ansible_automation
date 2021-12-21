@@ -1,0 +1,4 @@
+---
+
+- name: installing httpd application
+  yum: name=httpd

@@ -1,0 +1,19 @@
+---
+
+- hosts: localhost
+  vars:
+    home: /home/ec2-user
+  tasks:
+
+  - name: debug variable
+    debug: var=home
+
+  - name: creating file
+    file:
+      path: "{{ home }}/test-ansible"
+      state: touch
+    register: task1
+
+  - name: debugging task output
+    debug: var=task1
+

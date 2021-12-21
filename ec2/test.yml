@@ -1,0 +1,15 @@
+---
+- hosts: localhost
+  vars:
+    project_name: dev3
+    env: stage3
+    region: us-east-2
+    ansible_python_interpreter: /usr/bin/python3
+  tasks:
+  - name: adding public ip to hosts
+    lineinfile: 
+      path: /home/ec2-user/ec2/hosts
+      regexp: 10.2.3.4
+      insertafter: "[webserver]" 
+      line: 10.2.3.4
+      state: present
