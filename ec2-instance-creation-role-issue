@@ -1,0 +1,5 @@
+#Install the below packages for resolving ansible_python_interpreter issue:
+
+  python3 -m pip install --user --upgrade pip
+  python3 -m pip install ansible boto3 botocore
+  pip install boto
