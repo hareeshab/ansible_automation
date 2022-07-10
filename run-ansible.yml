@@ -2,7 +2,7 @@
 - hosts: dev
   become: yes
   become_method: sudo
-  remote_user: ec2-user
+  remote_user: ubuntu
   
   roles:
   - my-role
