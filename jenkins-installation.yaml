@@ -1,13 +1,24 @@
 ---
- - hosts: My_Group
+ - hosts: app
  
    tasks:
+
+    - name: update the server
+      shell: apt-get update
+      become: yes
+      
     - name: ensure the jenkins apt repository key is installed
-      apt_key: url=https://pkg.jenkins.io/debian-stable/jenkins.io.key state=present
+      shell: curl -fsSL https://pkg.jenkins.io/debian-stable/jenkins.io.key | sudo tee /usr/share/keyrings/jenkins-keyring.asc > /dev/null
       become: yes
 
     - name: ensure the repository is configured
-      apt_repository: repo='deb https://pkg.jenkins.io/debian-stable binary/' state=present
+      shell: echo deb [signed-by=/usr/share/keyrings/jenkins-keyring.asc] https://pkg.jenkins.io/debian-stable binary/ | sudo tee /etc/apt/sources.list.d/jenkins.list > /dev/null
+      become: yes
+
+    - name: Install Default Java (Debian/Ubuntu)
+      apt:
+        name: default-jdk
+        state: present
       become: yes
 
     - name: ensure jenkins is installed
