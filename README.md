@@ -7,6 +7,9 @@ https://www.digitalocean.com/community/tutorials/how-to-install-and-configure-an
 
 #### Ansible windows setup ref:
 
+
+**Link**:  https://www.devopsschool.com/tutorial/ansible/ansible-windows-adhoc-commands.html#Program1
+
 Set Up Windows Inventory File Correctly
 Following:
 
