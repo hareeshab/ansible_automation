@@ -1,12 +1,12 @@
 ---
-- name: Install basic packages
-  package:
-    name: ['vim','bash-completion','tmux','tree','htop','wget','unzip','curl','git']
-    state: present
+#- name: Install basic packages
+#  package:
+#    name: ['vim','bash-completion','tmux','tree','htop','wget','unzip','curl','git']
+#    state: present
 
 - name: Install Java 8 CentOS
   yum:
-    name: java-1.8.0-openjdk
+    name: java-1.8.0-amazon-corretto-devel.x86_64
     state: present
 
 - name: Add tomcat group
@@ -55,21 +55,6 @@
     name: tomcat
     state: started
     enabled: yes
-  when: ansible_service_mgr == "systemd"
-
-- name: Start and enable firewalld
-  service:
-    name: firewalld
-    state: started
-    enabled: yes
-  when: ansible_service_mgr == "systemd"
-
-- name: Open tomcat port on the firewall
-  firewalld:
-    port: 8080/tcp
-    permanent: true
-    state: enabled
-    immediate: yes
   when: ansible_service_mgr == "systemd"
 
 - name: Set UI access credentials
