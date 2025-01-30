@@ -1,0 +1,36 @@
+---
+- hosts: app
+  become: true
+  become_method: sudo
+  tasks: 
+  - name: check the tomcat service status
+    shell: "service tomcat status"
+    register: tomcat_status
+
+  - name: display the tomcat service status
+    debug:
+      var: tomcat_status
+
+  - name: output
+    debug:
+      var: tomcat_status.rc
+
+  - name: test
+    shell: echo "testing when condition"
+    when: tomcat_status.rc == 0
+
+  - name: stop the tomcat
+    service: 
+      name: tomcat
+      state: stopped
+    when: tomcat_status.rc == 0
+
+  - name: deploy war file
+    copy:
+      src: SampleWebApp.war
+      dest: /opt/tomcat/webapps
+
+  - name: start the tomcat
+    service:
+      name: tomcat
+      state: started
