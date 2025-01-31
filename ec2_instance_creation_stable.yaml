@@ -1,0 +1,23 @@
+---
+- name: Create an EC2 instance
+  hosts: localhost
+  gather_facts: no
+  tasks:
+    - name: Ensure the EC2 instance is created
+      amazon.aws.ec2_instance:
+        key_name: "hareesha-aws"
+        instance_type: "t2.micro"
+        image_id: "ami-0c614dee691cbbf37"  # Replace with your desired AMI ID
+        region: "us-east-1"
+        vpc_subnet_id: "subnet-06931e992f53f9388"  # Replace with your subnet ID
+        security_group: "sg-008f6a2f5f46496f1"
+        count: 1
+        state: present
+        tags:
+          Name: "MyEC2Instance"
+          Environment: "Development"
+      register: ec2
+
+    - name: Print the instance ID
+      debug:
+        msg: "Instance ID: {{ ec2.instances[0].instance_id }}"
